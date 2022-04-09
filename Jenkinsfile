@@ -10,12 +10,12 @@ pipeline {
         stage('Build'){
             steps{
                  sh script: 'mvn clean package'
+                 archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
             }
         }
         stage('Upload War To Nexus'){
             steps{
                 script{
-
                     def mavenPom = readMavenPom file: 'pom.xml'
                     def nexusRepoName = mavenPom.version.endsWith("SNAPSHOT") ? "maven-central-repo-snapshot" : "maven-central-repo"
                     nexusArtifactUploader artifacts: [
@@ -31,7 +31,7 @@ pipeline {
                     nexusUrl: '192.168.1.7:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
-                    repository: nexusRepoName, 
+                    repository: 'nexusRepoName', 
                     version: "${mavenPom.version}"
                     }
             }
