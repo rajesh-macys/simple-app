@@ -1,3 +1,5 @@
+
+
 pipeline {
     agent any
     tools {
@@ -12,7 +14,7 @@ pipeline {
         stage('Upload War To Nexus'){
             steps{
                 script{
-                 def mavenPom = readMavenPom 'pom.xml'
+                 def mavenPom = readMavenPom file 'pom.xml'
                  nexusArtifactUploader artifacts: [
                      [
                          artifactId: 'simple-app', 
@@ -33,4 +35,3 @@ pipeline {
         }
     }
 }
-
