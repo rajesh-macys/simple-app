@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'maven'
+        maven 'maven3'
     }
     options {
         buildDiscarder logRotator(daysToKeepStr: '5', numToKeepStr: '7')
@@ -27,7 +27,7 @@ pipeline {
                             type: 'war'
                         ]
                     ], 
-                    credentialsId: 'nexus3', 
+                    credentialsId: 'nexus-creds', 
                     groupId: 'in.javahome', 
                     nexusUrl: 'http://192.168.1.7:8081/', 
                     nexusVersion: 'nexus3', 
