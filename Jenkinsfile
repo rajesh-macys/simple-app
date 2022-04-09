@@ -15,6 +15,7 @@ pipeline {
         stage('Upload War To Nexus'){
             steps{
                 script{
+
                     def mavenPom = readMavenPom file: 'pom.xml'
                     def nexusRepoName = mavenPom.version.endsWith("SNAPSHOT") ? "maven-central-repo-snapshot" : "maven-central-repo"
                     nexusArtifactUploader artifacts: [
@@ -37,3 +38,5 @@ pipeline {
         }
     }
 }
+
+
